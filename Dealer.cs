@@ -1,6 +1,19 @@
-namespace BlackJackGame;
+public class Dealer : Participant
+{ 
+    public Dealer() : base()
+    {
+    }
 
-public class Dealer
-{
-    
+    // Metoda - systém lízání pro dealera
+    public bool ShouldHit()
+    {
+        if (GetHandScore() < 17)
+        {
+            return true;  // hit
+        }
+        else
+        {
+            return false; // stand
+        }
+    }
 }

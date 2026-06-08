@@ -4,11 +4,9 @@ public enum CardValue { Two, Three, Four, Five, Six, Seven, Eight, Nine, Ten, Ja
 
 public class Card
 {
-    // Vlastnosti
     public CardType Type { get; private set; }
     public CardValue Value { get; private set; }
-
-    // Konstruktor - přiřadí barvu a hodnotu
+    
     public Card(CardType type, CardValue value)
     {
         Type = type;
@@ -30,7 +28,6 @@ public class Card
             return 10;
         }
         
-        // Zbytek - bežné karty
         if (Value == CardValue.Nine) return 9;
         if (Value == CardValue.Eight) return 8;
         if (Value == CardValue.Seven) return 7;

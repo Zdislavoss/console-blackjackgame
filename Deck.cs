@@ -1,10 +1,9 @@
 public class Deck
 {
-    // Seznam kde jsou karty
     private List<Card> cards;
     private Random random;
 
-    // Konstruktor - vytvoří prázdný seznam a připraví generátor náhodných čísel
+    
     public Deck()
     {
         cards = new List<Card>();
@@ -17,10 +16,9 @@ public class Deck
     // Metoda se zavolá, když se zapne hra, nebo dojdou karty
     private void InitializeDeck()
     {
-        cards.Clear(); // Vyčistíme, ať je seznam prázdný
+        cards.Clear(); 
 
         //Vytváření karet do balíčku
-        
         // Srdce
         cards.Add(new Card(CardType.Hearts, CardValue.Two));
         cards.Add(new Card(CardType.Hearts, CardValue.Three));
@@ -82,7 +80,7 @@ public class Deck
         cards.Add(new Card(CardType.Clubs, CardValue.Ace));
     }
 
-    // Náhodné lízáni karty
+ 
     public Card DrawCard()
     {
         // Jestli v balíčku nic nezbylo, znovu ho naplníme
