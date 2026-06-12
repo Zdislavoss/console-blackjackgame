@@ -1,1 +1,1 @@
-cau tady to pan ucitel uvidi a vsichni ostatni
+cau tady to pan ucitel uvidi a vsichni ostatni ale musim to dodelat prvne 

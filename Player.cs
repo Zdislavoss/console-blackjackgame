@@ -1,45 +1,59 @@
 public class Player : Participant
 { 
     public int Chips { get; private set; }
-    public int CurrentBet { get; private set; }
-    
-    public Player(int startingChips) : base()  // Prvně načte Participanta
+    public int CurrentBet { get; set; } 
+ 
+    public Player(int startingChips) : base()  
     {
         Chips = startingChips;
-        CurrentBet = 0; 
+        CurrentBet = 0;
     }
 
-    // Metoda pro vsazení žetonů
+    // Metoda pro vsazení žetonů do hry
     public bool PlaceBet(int amount)
     {
+        // Kontrola, že sázka není záporná nebo není víc než má
         if (amount <= 0 || amount > Chips)
         {
-            return false; // Sázka je neplatná - nemůže vsadit 0 nebo nic
+            return false;
         }
 
-        CurrentBet = amount;     
-        Chips = Chips - amount;  
-        return true;             
+        CurrentBet = amount;
+        Chips = Chips - amount; 
+        return true;
+    }
+    
+    // Metoda pro odstranění karty z ruky
+    public Card RemoveCard(int index)
+    {
+        // Kontrola, zda zadaný index spadá do reálného rozsahu karet v ruce 
+        if (index >= 0 && index < hand.Count)
+        {
+            Card card = hand[index]; // Uloží kartu z dané pozice do pomocné proměnné
+            hand.RemoveAt(index);    
+            return card;             // Vrátí smazanou kartu pro GameManager
+        }
+        return null;
     }
 
-    // Metoda, výherní kolo
-    public void Win()
+    // Metoda, výhra
+    public void Win(double multiplier = 1.0)
     {
-        
-        Chips = Chips + (CurrentBet * 2);
-        CurrentBet = 0; // Kolo skončilo, vyčistíme sázku pro další hru
+        int wonAmount = (int)(CurrentBet * multiplier);
+        Chips = Chips + CurrentBet + wonAmount;
+        CurrentBet = 0; 
     }
 
     // Metoda, remíza
     public void Draw()
     {
-        Chips = Chips + CurrentBet;
+        Chips = Chips + CurrentBet; 
         CurrentBet = 0;
     }
 
     // Metoda, prohra
     public void Lose()
     {
-        CurrentBet = 0;
+        CurrentBet = 0; 
     }
 }

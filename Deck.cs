@@ -1,104 +1,97 @@
 public class Deck
 {
     private List<Card> cards;
+    
+    // Generátor náhodných čísel, pro míchání karet
     private Random random;
-
     
     public Deck()
     {
-        cards = new List<Card>();
-        random = new Random();
+        cards = new List<Card>(); 
+        random = new Random();     
         
-        // Na začátku hry se naplní balíček
-        InitializeDeck();
+        ResetDeck(); // Na začátku hry naplní balíček 52 kartami
     }
 
-    // Metoda se zavolá, když se zapne hra, nebo dojdou karty
-    private void InitializeDeck()
+    // Metoda, která resetuje a generuje novou sadu karet pro novou hru
+    public void ResetDeck()
     {
-        cards.Clear(); 
+        cards.Clear();
+        
+        
+        //SRDCE 
+        cards.Add(new Card(Card.CardType.Hearts, Card.CardValue.Dva));
+        cards.Add(new Card(Card.CardType.Hearts, Card.CardValue.Tri));
+        cards.Add(new Card(Card.CardType.Hearts, Card.CardValue.Ctyri));
+        cards.Add(new Card(Card.CardType.Hearts, Card.CardValue.Pet));
+        cards.Add(new Card(Card.CardType.Hearts, Card.CardValue.Sest));
+        cards.Add(new Card(Card.CardType.Hearts, Card.CardValue.Sedm));
+        cards.Add(new Card(Card.CardType.Hearts, Card.CardValue.Osm));
+        cards.Add(new Card(Card.CardType.Hearts, Card.CardValue.Devet));
+        cards.Add(new Card(Card.CardType.Hearts, Card.CardValue.Deset));
+        cards.Add(new Card(Card.CardType.Hearts, Card.CardValue.J));
+        cards.Add(new Card(Card.CardType.Hearts, Card.CardValue.Q));
+        cards.Add(new Card(Card.CardType.Hearts, Card.CardValue.K));
+        cards.Add(new Card(Card.CardType.Hearts, Card.CardValue.A));
 
-        //Vytváření karet do balíčku
-        // Srdce
-        cards.Add(new Card(CardType.Hearts, CardValue.Two));
-        cards.Add(new Card(CardType.Hearts, CardValue.Three));
-        cards.Add(new Card(CardType.Hearts, CardValue.Four));
-        cards.Add(new Card(CardType.Hearts, CardValue.Five));
-        cards.Add(new Card(CardType.Hearts, CardValue.Six));
-        cards.Add(new Card(CardType.Hearts, CardValue.Seven));
-        cards.Add(new Card(CardType.Hearts, CardValue.Eight));
-        cards.Add(new Card(CardType.Hearts, CardValue.Nine));
-        cards.Add(new Card(CardType.Hearts, CardValue.Ten));
-        cards.Add(new Card(CardType.Hearts, CardValue.Jack));
-        cards.Add(new Card(CardType.Hearts, CardValue.Queen));
-        cards.Add(new Card(CardType.Hearts, CardValue.King));
-        cards.Add(new Card(CardType.Hearts, CardValue.Ace));
+        //KÁRY
+        cards.Add(new Card(Card.CardType.Diamonds, Card.CardValue.Dva));
+        cards.Add(new Card(Card.CardType.Diamonds, Card.CardValue.Tri));
+        cards.Add(new Card(Card.CardType.Diamonds, Card.CardValue.Ctyri));
+        cards.Add(new Card(Card.CardType.Diamonds, Card.CardValue.Pet));
+        cards.Add(new Card(Card.CardType.Diamonds, Card.CardValue.Sest));
+        cards.Add(new Card(Card.CardType.Diamonds, Card.CardValue.Sedm));
+        cards.Add(new Card(Card.CardType.Diamonds, Card.CardValue.Osm));
+        cards.Add(new Card(Card.CardType.Diamonds, Card.CardValue.Devet));
+        cards.Add(new Card(Card.CardType.Diamonds, Card.CardValue.Deset));
+        cards.Add(new Card(Card.CardType.Diamonds, Card.CardValue.J));
+        cards.Add(new Card(Card.CardType.Diamonds, Card.CardValue.Q));
+        cards.Add(new Card(Card.CardType.Diamonds, Card.CardValue.K));
+        cards.Add(new Card(Card.CardType.Diamonds, Card.CardValue.A));
 
-        // Káry
-        cards.Add(new Card(CardType.Diamonds, CardValue.Two));
-        cards.Add(new Card(CardType.Diamonds, CardValue.Three));
-        cards.Add(new Card(CardType.Diamonds, CardValue.Four));
-        cards.Add(new Card(CardType.Diamonds, CardValue.Five));
-        cards.Add(new Card(CardType.Diamonds, CardValue.Six));
-        cards.Add(new Card(CardType.Diamonds, CardValue.Seven));
-        cards.Add(new Card(CardType.Diamonds, CardValue.Eight));
-        cards.Add(new Card(CardType.Diamonds, CardValue.Nine));
-        cards.Add(new Card(CardType.Diamonds, CardValue.Ten));
-        cards.Add(new Card(CardType.Diamonds, CardValue.Jack));
-        cards.Add(new Card(CardType.Diamonds, CardValue.Queen));
-        cards.Add(new Card(CardType.Diamonds, CardValue.King));
-        cards.Add(new Card(CardType.Diamonds, CardValue.Ace));
+        //PIKY
+        cards.Add(new Card(Card.CardType.Spades, Card.CardValue.Dva));
+        cards.Add(new Card(Card.CardType.Spades, Card.CardValue.Tri));
+        cards.Add(new Card(Card.CardType.Spades, Card.CardValue.Ctyri));
+        cards.Add(new Card(Card.CardType.Spades, Card.CardValue.Pet));
+        cards.Add(new Card(Card.CardType.Spades, Card.CardValue.Sest));
+        cards.Add(new Card(Card.CardType.Spades, Card.CardValue.Sedm));
+        cards.Add(new Card(Card.CardType.Spades, Card.CardValue.Osm));
+        cards.Add(new Card(Card.CardType.Spades, Card.CardValue.Devet));
+        cards.Add(new Card(Card.CardType.Spades, Card.CardValue.Deset));
+        cards.Add(new Card(Card.CardType.Spades, Card.CardValue.J));
+        cards.Add(new Card(Card.CardType.Spades, Card.CardValue.Q));
+        cards.Add(new Card(Card.CardType.Spades, Card.CardValue.K));
+        cards.Add(new Card(Card.CardType.Spades, Card.CardValue.A));
 
-        // Piky
-        cards.Add(new Card(CardType.Spades, CardValue.Two));
-        cards.Add(new Card(CardType.Spades, CardValue.Three));
-        cards.Add(new Card(CardType.Spades, CardValue.Four));
-        cards.Add(new Card(CardType.Spades, CardValue.Five));
-        cards.Add(new Card(CardType.Spades, CardValue.Six));
-        cards.Add(new Card(CardType.Spades, CardValue.Seven));
-        cards.Add(new Card(CardType.Spades, CardValue.Eight));
-        cards.Add(new Card(CardType.Spades, CardValue.Nine));
-        cards.Add(new Card(CardType.Spades, CardValue.Ten));
-        cards.Add(new Card(CardType.Spades, CardValue.Jack));
-        cards.Add(new Card(CardType.Spades, CardValue.Queen));
-        cards.Add(new Card(CardType.Spades, CardValue.King));
-        cards.Add(new Card(CardType.Spades, CardValue.Ace));
-
-        // Kříže
-        cards.Add(new Card(CardType.Clubs, CardValue.Two));
-        cards.Add(new Card(CardType.Clubs, CardValue.Three));
-        cards.Add(new Card(CardType.Clubs, CardValue.Four));
-        cards.Add(new Card(CardType.Clubs, CardValue.Five));
-        cards.Add(new Card(CardType.Clubs, CardValue.Six));
-        cards.Add(new Card(CardType.Clubs, CardValue.Seven));
-        cards.Add(new Card(CardType.Clubs, CardValue.Eight));
-        cards.Add(new Card(CardType.Clubs, CardValue.Nine));
-        cards.Add(new Card(CardType.Clubs, CardValue.Ten));
-        cards.Add(new Card(CardType.Clubs, CardValue.Jack));
-        cards.Add(new Card(CardType.Clubs, CardValue.Queen));
-        cards.Add(new Card(CardType.Clubs, CardValue.King));
-        cards.Add(new Card(CardType.Clubs, CardValue.Ace));
+        //KŘÍŽE
+        cards.Add(new Card(Card.CardType.Clubs, Card.CardValue.Dva));
+        cards.Add(new Card(Card.CardType.Clubs, Card.CardValue.Tri));
+        cards.Add(new Card(Card.CardType.Clubs, Card.CardValue.Ctyri));
+        cards.Add(new Card(Card.CardType.Clubs, Card.CardValue.Pet));
+        cards.Add(new Card(Card.CardType.Clubs, Card.CardValue.Sest));
+        cards.Add(new Card(Card.CardType.Clubs, Card.CardValue.Sedm));
+        cards.Add(new Card(Card.CardType.Clubs, Card.CardValue.Osm));
+        cards.Add(new Card(Card.CardType.Clubs, Card.CardValue.Devet));
+        cards.Add(new Card(Card.CardType.Clubs, Card.CardValue.Deset));
+        cards.Add(new Card(Card.CardType.Clubs, Card.CardValue.J));
+        cards.Add(new Card(Card.CardType.Clubs, Card.CardValue.Q));
+        cards.Add(new Card(Card.CardType.Clubs, Card.CardValue.K));
+        cards.Add(new Card(Card.CardType.Clubs, Card.CardValue.A));
     }
 
- 
+    // Metoda, která z balíčku vytáhne náhodnou kartu
     public Card DrawCard()
     {
-        // Jestli v balíčku nic nezbylo, znovu ho naplníme
         if (cards.Count == 0)
         {
-            InitializeDeck();
+            ResetDeck(); 
         }
 
-        // Vybere se náhodné číslo od 0 do počtu karet v balíčku co zbývá
-        int randomIndex = random.Next(0, cards.Count);
-
-        // Vezme se náhodná karta
-        Card drawnCard = cards[randomIndex];
-
-        // Smaže se z balíčku, aby si ji nevzal někdo dvakrát
-        cards.RemoveAt(randomIndex);
-
-        // Vrátíme ji hráči nebo krupiérovi
-        return drawnCard;
+        // Vybere náhodný index od 0 do zbyvajicího poctu karet
+        int index = random.Next(cards.Count);
+        Card drawnCard = cards[index]; 
+        cards.RemoveAt(index);          
+        return drawnCard;               
     }
 }

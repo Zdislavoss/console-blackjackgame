@@ -1,66 +1,74 @@
-// Dva enumy - barva a typ (pevný seznam)
-public enum CardType { Hearts, Diamonds, Spades, Clubs }
-public enum CardValue { Two, Three, Four, Five, Six, Seven, Eight, Nine, Ten, Jack, Queen, King, Ace }
-
 public class Card
 {
+    // Enum pro typy karet
+    public enum CardType { Hearts, Diamonds, Spades, Clubs }
+    
+    // Enum pro karty 2-A
+    public enum CardValue { Dva = 2, Tri, Ctyri, Pet, Sest, Sedm, Osm, Devet, Deset, J, Q, K, A }
+    
     public CardType Type { get; private set; }
+    
     public CardValue Value { get; private set; }
     
     public Card(CardType type, CardValue value)
     {
-        Type = type;
-        Value = value;
+        Type = type;   
+        Value = value; 
     }
 
-    // Metoda, vrací hodnotu karty podle BJ
+    // Metoda, která vrací bodovou hodnotu karty 
     public int GetBlackjackValue()
     {
-        // Eso = 11
-        if (Value == CardValue.Ace)
+        if (Value == CardValue.A)
         {
-            return 11;
+            return 11; 
         }
         
-        // Obrazek nebo 10 = 10
-        if (Value == CardValue.Ten || Value == CardValue.Jack || Value == CardValue.Queen || Value == CardValue.King)
+        // Pokud je to obrázek nebo 10, vrátí 10
+        if (Value == CardValue.Deset || Value == CardValue.J || Value == CardValue.Q || Value == CardValue.K)
         {
-            return 10;
+            return 10; 
         }
         
-        if (Value == CardValue.Nine) return 9;
-        if (Value == CardValue.Eight) return 8;
-        if (Value == CardValue.Seven) return 7;
-        if (Value == CardValue.Six) return 6;
-        if (Value == CardValue.Five) return 5;
-        if (Value == CardValue.Four) return 4;
-        if (Value == CardValue.Three) return 3;
-        if (Value == CardValue.Two) return 2;
-        
-        return 1;
+        // Pro ostatní karty 2-9
+        return (int)Value;
     }
 
-    // Převedení enumu na symbol (grafiku)
+    // Metoda, který vrací symboly pro konzoli
     public string GetTypeSymbol()
     {
-        if (Type == CardType.Hearts) return "♥";
-        if (Type == CardType.Diamonds) return "♦";
-        if (Type == CardType.Spades) return "♠";
-        if (Type == CardType.Clubs) return "♣";
+        if (Type == CardType.Hearts) return "♥";   
+        if (Type == CardType.Diamonds) return "♦"; 
+        if (Type == CardType.Spades) return "♠";   
+        if (Type == CardType.Clubs) return "♣";    
         
-        return "X";
+        return "X"; 
     }
 
-    // Vyhodnocení barvy - červená/černá
-    public bool IsRed()
+    // Metoda, která převádí hodnotu karty na text
+    public string GetValueString()
     {
+        if (Value == CardValue.J) return "J"; 
+        if (Value == CardValue.Q) return "Q"; 
+        if (Value == CardValue.K) return "K"; 
+        if (Value == CardValue.A) return "A"; 
+        
+        // Ostatní čísla na string
+        return ((int)Value).ToString();
+    }
+    
+    // Metoda pro barevné vykreslení karet
+    public void PrintCard()
+    {
+        ConsoleColor originalColor = Console.ForegroundColor;
+        // Pokud je karta červená (srdce nebo káry)
         if (Type == CardType.Hearts || Type == CardType.Diamonds)
         {
-            return true;
+            Console.ForegroundColor = ConsoleColor.Red; 
         }
-        else
-        {
-            return false;
-        }
+
+        // Vypíše kartu do konzole 
+        Console.Write("[ " + GetTypeSymbol() + " " + GetValueString() + " ] ");
+        Console.ForegroundColor = originalColor;
     }
 }

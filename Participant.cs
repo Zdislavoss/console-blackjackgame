@@ -1,61 +1,90 @@
 public abstract class Participant
 {
-    // Seznam karet, které drží hráč nebo krupiér v ruce
+    // Seznam karet, které má v ruce
     protected List<Card> hand;
+    
+    // IReadOnlyList znamená, že ostatní části programu si karty můžou prohlédnout, ale nemůžou je přímo měnit
+    public IReadOnlyList<Card> Hand => hand;
+
+    // Konstruktor vytvoří prázdnou ruku pro hráče nebo dealera
     public Participant()
     {
         hand = new List<Card>();
     }
-
-    // Metoda pro přidání karty do ruky - líznutí
+    
     public void AddCard(Card card)
     {
         hand.Add(card);
     }
-
-    // Metoda pro vymazání všech karet z ruky 
+    
     public void ClearHand()
     {
         hand.Clear();
     }
 
-    // Metoda která spočítá celkové body karet v ruce a automaticky vyřeší Esa
+    // Metoda, spočítá hodnotu celé ruky 
     public int GetHandScore()
     {
-        int score = 0;
-        int aceCount = 0;
+        int score = 0;    
+        int aceCount = 0; 
 
-        // sečtení základní hodnoty všech karet v ruce
+        // Projde všechny karty v ruce
         foreach (Card card in hand)
         {
             score = score + card.GetBlackjackValue();
             
-            if (card.Value == CardValue.Ace)
+            if (card.Value == Card.CardValue.A)
             {
                 aceCount++;
             }
         }
         
-        // Logika esa (nad 21 = -10)
+        // Funkce es
         while (score > 21 && aceCount > 0)
         {
-            score = score - 10;
-            aceCount--; 
+            score = score - 10; 
+            aceCount--;         
         }
-            
         return score;
     }
 
-    // Textový Výstup
+    // Metoda, vytvoří textový zápis karet v ruce
     public string GetHandString()
     {
-        string text = "";
-        
+        string text = ""; 
+
+        // Projde všechny karty v ruce
         foreach (Card card in hand)
         {
-            text = text + "[ " + card.Type + " " + card.Value + " ] ";
+            text = text + $"[ {card.GetTypeSymbol()} {card.GetValueString()} ] ";
         }
-        
         return text;
+    }
+
+    // Metoda, vypíše celou ruku do konzole
+    public void PrintHand()
+    {
+        string handString = GetHandString();
+        if (string.IsNullOrEmpty(handString)) return;
+
+        // Text ruky se rozdělí na jednotlivé karty
+        string[] cards = handString.Split(new string[] { " ]" }, StringSplitOptions.RemoveEmptyEntries);
+
+        // Projde každou kartu zvlášť.
+        foreach (var cardText in cards)
+        {
+            string trimmedCard = cardText.Trim();
+
+            // Pokud by vznikl prázdný text, přeskočí se.
+            if (string.IsNullOrEmpty(trimmedCard)) continue;
+            
+            if (trimmedCard.Contains("♥") || trimmedCard.Contains("♦"))
+            {
+                Console.ForegroundColor = ConsoleColor.Red; 
+            }
+            
+            Console.Write(trimmedCard + " ] ");
+            Console.ResetColor(); 
+        }
     }
 }
