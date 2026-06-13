@@ -276,15 +276,27 @@ private int GetBet()
                 return bet;
             }
             
+            Console.Clear();
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("Neplatná částka! Nemáš dost žetonů.");
             Console.ResetColor();
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine();
+            Console.WriteLine($"=== NOVÉ KOLO (Tvoje žetony: {player.Chips}) ===");
+            Console.ResetColor();
+            Console.WriteLine();
         }
         else
         {
+            Console.Clear();
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("Chyba! Musíš zadat celé číslo.");
             Console.ResetColor();
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine();
+            Console.WriteLine($"=== NOVÉ KOLO (Tvoje žetony: {player.Chips}) ===");
+            Console.ResetColor();
+            Console.WriteLine();
         }
     }
 }
